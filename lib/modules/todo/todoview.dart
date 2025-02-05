@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +9,11 @@ import 'controllers.dart';
 import 'todomodel.dart';
 
 class Todoview extends StatefulWidget {
-  const Todoview({super.key, required String title});
-
+  const Todoview({
+    super.key,
+    this.title,
+  });
+  final title;
   @override
   State<Todoview> createState() => _TodoviewState();
 }
@@ -24,8 +28,8 @@ class _TodoviewState extends State<Todoview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Todo List",
+        title: Text(
+          widget.title,
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Color.fromARGB(255, 3, 34, 88),
