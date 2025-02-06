@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:get/get.dart';
 import 'package:todo/modules/todo/todomodel.dart';
 
@@ -9,5 +11,16 @@ class TodoController extends GetxController {
 
   void deleteTask(int id) {
     todo.removeWhere((task) => task.id == id);
+  }
+
+  void updateTask(int id, bool status) {
+    int index = todo.indexWhere((task) => task.id == id);
+    if (index != -1) {
+      todo[index] = Todolist(
+        id: todo[index].id,
+        title: todo[index].title,
+        completed: !todo[index].completed,
+      );
+    }
   }
 }
