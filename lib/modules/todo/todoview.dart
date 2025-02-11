@@ -65,7 +65,8 @@ class _TodoviewState extends State<Todoview> {
           children: [
             Expanded(
               flex: 3,
-              child: TextFormField(
+              child:
+               TextFormField(
                 controller: tittleController,
                 decoration: const InputDecoration(
                   hintText: 'Type something...',
