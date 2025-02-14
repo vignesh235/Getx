@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'controllers.dart';
 import 'todomodel.dart';
 
@@ -30,9 +27,9 @@ class _TodoviewState extends State<Todoview> {
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color.fromARGB(255, 3, 34, 88),
+        backgroundColor: const Color.fromARGB(255, 3, 34, 88),
         centerTitle: true,
       ),
       body: Obx(
@@ -41,10 +38,18 @@ class _TodoviewState extends State<Todoview> {
             itemBuilder: (BuildContext context, int index) {
               return Card(
                 child: ListTile(
-                  title: Text(todoController.todo[index].title),
+                  title: Text(
+                    todoController.todo[index].title,
+                    style: TextStyle(
+                        decoration: todoController.todo[index].completed
+                            ? TextDecoration.lineThrough
+                            : null),
+                  ),
                   leading: Checkbox(
-                    value: _checked,
-                    onChanged: (value) {},
+                    value: todoController.todo[index].completed,
+                    onChanged: (value) {
+                      todoController.updateTask(todoController.todo[index].id, _checked);
+                    },
                   ),
                   trailing: IconButton(
                       onPressed: () {
@@ -60,7 +65,8 @@ class _TodoviewState extends State<Todoview> {
           children: [
             Expanded(
               flex: 3,
-              child: TextFormField(
+              child:
+               TextFormField(
                 controller: tittleController,
                 decoration: const InputDecoration(
                   hintText: 'Type something...',
@@ -73,9 +79,10 @@ class _TodoviewState extends State<Todoview> {
                 flex: 1,
                 child: IconButton(
                     onPressed: () {
-                      todoController.addTask(tittleController.text, false);
-                      tittleController.clear();
-                      log(jsonEncode(todolist).toString());
+                      if (tittleController.text.isNotEmpty) {
+                        todoController.addTask(tittleController.text, false);
+                        tittleController.clear();
+                      }
                     },
                     icon: const Icon(Icons.add)))
           ],
