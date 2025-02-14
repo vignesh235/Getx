@@ -12,14 +12,44 @@ class Apicall {
       receiveTimeout: const Duration(seconds: 10),
     ),
   );
-  Future getWeather(String city, String apikey) async {
-    log("APIiiiiiiiiiiiiiiiiiiiiiii");
-    log(city);
+  // Future getWeather(String city, String apikey) async {
+  //   try {
+  //     Response response = await dio.get("weather", queryParameters: {"q": city, "appid": apikey});
+  //     return response.data;
+  //   } catch (e) {
+  //     return {};
+  //   }
+  // }
+
+  Future makeApical(
+    String endpoint,
+    String method,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? data,
+  ) async {
     try {
-      Response response = await dio.get("weather", queryParameters: {"q": city, "appid": apikey});
-      return response.data;
+      switch (method) {
+        case "GET":
+          Response response = await dio.get(
+            endpoint,
+            queryParameters: queryParameters,
+          );
+          return response.data;
+        case "POST":
+          Response response = await dio.post(
+            endpoint,
+            queryParameters: queryParameters,
+          );
+          return response.data;
+        default:
+          Response response = await dio.put(
+            endpoint,
+            queryParameters: queryParameters,
+          );
+          return response.data;
+      }
     } catch (e) {
-      return {};
+
     }
   }
 }

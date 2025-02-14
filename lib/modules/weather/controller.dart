@@ -7,10 +7,11 @@ class WeatherController extends GetxController {
   var weatherData = {}.obs;
   var isLoading = false.obs;
 
-  void fetchWeather(String city, String token) async {
+  void fetchWeather(String endpoint, String method, String city, String token) async {
     isLoading.value = true;
     log(city);
-    final data = await Apicall.instance.getWeather(city, token);
+    final data =
+        await Apicall.instance.makeApical(endpoint, method, {"q": city, "appid": token}, {});
     if (data != null) {
       isLoading.value = false;
       log(data.toString());
