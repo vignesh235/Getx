@@ -16,7 +16,7 @@ class WeatherController extends GetxController {
     final data = await dioClient.getWeather(
         baseUrl: baseUrl,
         endpoint: endpoint,
-        queryParams: {"q": city, "token": token});
+        queryParams: {"q": city, "appId": token});
     if (data != null) {
       isLoading.value = false;
       log(data.toString());
