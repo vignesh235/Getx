@@ -40,6 +40,46 @@ class Vehicle {
   //const Vehicle(this.name, this.age);
 }
 
+class Employee {
+  String name;
+  int age;
+
+  // Named Constructor
+  Employee.manager(this.name) : age = 40; // Default age for managers
+
+  Employee.worker(this.name, this.age);
+
+  void display() {
+    print("Name: $name, Age: $age");
+  }
+}
+
+class Circle {
+  final double radius;
+
+  // Constant Constructor
+  const Circle(this.radius);
+}
+
+class Database {
+  static Database? _instance;
+
+  // Factory Constructor
+  factory Database() {
+    if (_instance == null) {
+      //? also can be written like this  _instance ??= Database._internal();
+      _instance = Database._internal();
+    }
+    return _instance!;
+  }
+
+  Database._internal(); // Private constructor
+
+  void connect() {
+    print("Database Connected!");
+  }
+}
+
 void main() {
   Vehicle v = Vehicle("naveen", 23);
   print(v.name + "${v.age}");
