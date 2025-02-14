@@ -15,7 +15,8 @@ class ApiHelper {
             connectTimeout: const Duration(seconds: 10),
             receiveTimeout: const Duration(seconds: 10),
           ),
-        );
+        )..interceptors
+            .add(LogInterceptor(requestBody: true, responseBody: true));
 
   Future<Map<String, dynamic>> getWeather(
       {required String baseUrl,
@@ -32,6 +33,29 @@ class ApiHelper {
     } catch (e) {
       log("Unexpected error: $e");
       return {"error": "Something went wrong"};
+    }
+  }
+
+  Future<Response?> fetchImages(String search) async {
+    try {
+      String apiKey =
+          "etKXNsUjMLW60cmpv3Xmgv9JIPnzN4uNSXcYVoyvSkwBaVvgk7HEgyLW";
+      // Replace with your actual API key
+      _dio.options.headers = {
+        "Authorization": apiKey,
+      };
+
+      Response response = await _dio.get(
+        "https://api.pexels.com/v1/search",
+        queryParameters: {
+          "query": search,
+          "per_page": 5,
+        },
+      );
+      return response;
+    } catch (e) {
+      print("API Call Error: $e");
+      return null;
     }
   }
 }

@@ -26,7 +26,6 @@ class _WeatherviewState extends State<Weatherview> {
   }
 
   final WeatherController todoController = Get.put(WeatherController());
-  var token = '1ed3e1be4786ec8e17c282b9dee77492';
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +57,7 @@ class _WeatherviewState extends State<Weatherview> {
               onChanged: (String? newValue) {
                 setState(() {
                   selectedCity = newValue;
-                  todoController.fetchWeather(selectedCity!, token);
+                  todoController.fetchWeather(selectedCity!);
                 });
               },
               itemHeight: 50,
