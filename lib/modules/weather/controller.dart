@@ -1,22 +1,28 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:todo/modules/weather/servicecall.dart';
+import 'package:todo/api_helper/api_helper.dart';
 
 class WeatherController extends GetxController {
   var weatherData = {}.obs;
   var isLoading = false.obs;
 
-  void fetchWeather(String endpoint, String method, String city, String token) async {
+  void fetchWeather(String city) async {
+    var token = '1ed3e1be4786ec8e17c282b9dee77492';
+
+    final dioClient = ApiHelper();
+    const baseUrl = "https://api.openweathermap.org/data/2.5/";
+    const endpoint = "weather";
     isLoading.value = true;
     log(city);
-    final data =
-        await Apicall.instance.makeApicall(endpoint, method, {"q": city, "appid": token}, {});
-    if (data != null) {
-      isLoading.value = false;
-      log(data.toString());
-      weatherData.value = data;
-    }
+    // await dioClient.fetchNatureImages("nature");
+    final data = await dioClient.getWeather(
+        baseUrl: baseUrl,
+        endpoint: endpoint,
+        queryParams: {"q": city, "appid": token});
+    isLoading.value = false;
+    log(data.toString());
+    weatherData.value = data;
     isLoading.value = false;
   }
 }

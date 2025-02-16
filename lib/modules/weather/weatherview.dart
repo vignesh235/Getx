@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:todo/modules/weather/controller.dart';
-import 'package:todo/modules/weather/servicecall.dart';
 
 class Weatherview extends StatefulWidget {
   const Weatherview({super.key});
@@ -12,7 +10,14 @@ class Weatherview extends StatefulWidget {
 }
 
 String? selectedCity = "Coimbatore";
-List<String> cities = ["Mumbai", "Londan", "Bangalore", "Chennai", "Kolkata", "Coimbatore"];
+List<String> cities = [
+  "Mumbai",
+  "Londan",
+  "Bangalore",
+  "Chennai",
+  "Kolkata",
+  "Coimbatore"
+];
 
 class _WeatherviewState extends State<Weatherview> {
   @override
@@ -40,8 +45,10 @@ class _WeatherviewState extends State<Weatherview> {
             width: MediaQuery.of(context).size.width,
             child: DropdownButtonFormField<String>(
               decoration: const InputDecoration(
-                border: OutlineInputBorder(), // Adds a border around the dropdown
-                contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                border:
+                    OutlineInputBorder(), // Adds a border around the dropdown
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               ),
               hint: const Text("Choose a city"),
               value: selectedCity,
@@ -50,7 +57,7 @@ class _WeatherviewState extends State<Weatherview> {
               onChanged: (String? newValue) {
                 setState(() {
                   selectedCity = newValue;
-                  todoController.fetchWeather( "weather","GET",selectedCity!, "1ed3e1be4786ec8e17c282b9dee77492");
+                  todoController.fetchWeather(selectedCity!);
                 });
               },
               itemHeight: 50,
@@ -74,8 +81,10 @@ class _WeatherviewState extends State<Weatherview> {
                           ListTile(
                             leading: Image.network(
                                 'https://openweathermap.org/img/wn/${todoController.weatherData['weather'][0]['icon']}@2x.png'),
-                            title: Text(todoController.weatherData['weather'][0]['main']),
-                            subtitle: Text(todoController.weatherData['weather'][0]['description']),
+                            title: Text(todoController.weatherData['weather'][0]
+                                ['main']),
+                            subtitle: Text(todoController.weatherData['weather']
+                                [0]['description']),
                           ),
                         ],
                       );
