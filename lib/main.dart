@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/modules/audioplayer/audioplayerView.dart';
 import 'package:todo/modules/photos/photoListView.dart';
+import 'package:todo/modules/recipes/recipe_listview.dart';
 import 'package:todo/modules/todo/todoview.dart';
 
 import 'modules/weather/weatherview.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         useMaterial3: true,
       ),
-      home: Audioplayerview(),
+      home: const RecipeListView(),
     );
   }
 }
