@@ -6,6 +6,7 @@ import 'package:todo/api_helper/api_helper.dart';
 class WeatherController extends GetxController {
   var weatherData = {}.obs;
   var isLoading = false.obs;
+  var weatherData1 = {}.obs;
 
   void fetchWeather(String city) async {
     var token = '1ed3e1be4786ec8e17c282b9dee77492';
@@ -16,10 +17,8 @@ class WeatherController extends GetxController {
     isLoading.value = true;
     log(city);
     // await dioClient.fetchNatureImages("nature");
-    final data = await dioClient.getWeather(
-        baseUrl: baseUrl,
-        endpoint: endpoint,
-        queryParams: {"q": city, "appid": token});
+    final data = await dioClient
+        .getWeather(baseUrl: baseUrl, endpoint: endpoint, queryParams: {"q": city, "appid": token});
     isLoading.value = false;
     log(data.toString());
     weatherData.value = data;
