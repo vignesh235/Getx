@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo/modules/audioplayer/audioplayerView.dart';
 import 'package:todo/modules/photos/photoListView.dart';
 import 'package:todo/modules/recipes/recipe_listview.dart';
 import 'package:todo/modules/todo/todoview.dart';
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        iconButtonTheme: const IconButtonThemeData(
+            style: ButtonStyle(iconSize: WidgetStatePropertyAll(40))),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primaryColor: Colors.blue,
         useMaterial3: true,
       ),
       home: const Mapview(),
