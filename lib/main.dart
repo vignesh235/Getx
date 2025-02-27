@@ -4,6 +4,7 @@ import 'package:todo/modules/photos/photoListView.dart';
 import 'package:todo/modules/recipes/recipe_listview.dart';
 import 'package:todo/modules/todo/todoview.dart';
 
+import 'modules/googlemap/mapview.dart';
 import 'modules/weather/weatherview.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RecipeListView(),
+      home: const Mapview(),
     );
   }
 }
